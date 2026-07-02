@@ -13,9 +13,7 @@ below) — it exists to be `FROM`'d.
 | [maskmaster](https://github.com/sarah-e-c/maskmaster) | `main`, built with hardware discovery (`DISCOVERY=1`) | Higher-level mask-packing/topology-discovery helpers built on top of libsmctrl | `/opt/maskmaster/c/libmaskmaster.so`, `/opt/maskmaster/c/maskmaster.h` |
 | [nvdebug](http://rtsrv.cs.unc.edu/cgit/cgit.cgi/nvdebug.git) | `master` | Out-of-tree kernel module providing `/proc/gpu0/*`, which `mm_discover`/libsmctrl's info functions read | `/opt/nvdebug` (source only — built/loaded at container start, see "Runtime requirement") |
 
-This list is expected to grow — the point of renaming this from
-`smctrl-maskmaster-base` to `libsmctrl-toolkit` is to have a home for more
-libsmctrl-adjacent tools without implying it's just libsmctrl + maskmaster.
+This list is expected to grow : )
 
 Also present:
 - `LD_LIBRARY_PATH=/opt/maskmaster/c:/opt/libsmctrl`
@@ -120,9 +118,3 @@ Two things worth knowing before publishing broadly:
   packages default to private for repos that aren't public, so also check
   the package's visibility setting after the first push if you want it
   pullable without auth.
-
-## Status
-
-Renamed from `smctrl-maskmaster-base`. Not yet pushed to GitHub — this
-directory is self-contained (no path deps outside itself) specifically to
-make that move easy.
