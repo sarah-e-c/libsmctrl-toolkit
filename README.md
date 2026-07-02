@@ -11,9 +11,15 @@ below) — it exists to be `FROM`'d.
 |---|---|---|---|
 | [libsmctrl](https://github.com/sarah-e-c/libsmctrl) | `blackwell` branch of a personal fork, carrying the Blackwell/RTX 50-series `QMDV05_00` TPC-masking patch on top of upstream rtsrv.cs.unc.edu/libsmctrl | Low-level API for masking which GPU TPCs a CUDA stream/kernel can use | `/opt/libsmctrl/libsmctrl.so`, `/opt/libsmctrl/libsmctrl.h` |
 | [maskmaster](https://github.com/sarah-e-c/maskmaster) | `main`, built with hardware discovery (`DISCOVERY=1`) | Higher-level mask-packing/topology-discovery helpers built on top of libsmctrl | `/opt/maskmaster/c/libmaskmaster.so`, `/opt/maskmaster/c/maskmaster.h` |
-| [nvdebug](http://rtsrv.cs.unc.edu/cgit/cgit.cgi/nvdebug.git) | `master` | Out-of-tree kernel module providing `/proc/gpu0/*`, which `mm_discover`/libsmctrl's info functions read | `/opt/nvdebug` (source only — built/loaded at container start, see "Runtime requirement") |
+| [nvdebug](https://github.com/sarah-e-c/nvdebug) | `ecrts25-ae` branch of a personal mirror (canonical host, rtsrv.cs.unc.edu, is UNC-network-only and unreachable from GitHub Actions/most outside hosts) | Out-of-tree kernel module providing `/proc/gpu0/*`, which `mm_discover`/libsmctrl's info functions read | `/opt/nvdebug` (source only — built/loaded at container start, see "Runtime requirement") |
 
 This list is expected to grow : )
+
+The nvdebug mirror is a content snapshot, not a full history mirror — the
+original local clone had a corrupted git object in its ancestry, so
+`sarah-e-c/nvdebug`'s branches were pushed as single commits built from
+`git archive` of the current tips of `master`/`ecrts25-ae` rather than a
+history-preserving push.
 
 Also present:
 - `LD_LIBRARY_PATH=/opt/maskmaster/c:/opt/libsmctrl`

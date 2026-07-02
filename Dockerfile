@@ -23,12 +23,17 @@ RUN git clone https://github.com/sarah-e-c/maskmaster.git /opt/maskmaster \
 
 ENV LD_LIBRARY_PATH=/opt/maskmaster/c:/opt/libsmctrl
 
-# nvdebug (rtsrv.cs.unc.edu/nvdebug) source only -- NOT built here. It's a kbuild
-# out-of-tree kernel module and must be compiled against the exact kernel it will
-# be insmod'd into, so a .ko built in the image would only load on a host with the
+# nvdebug source only -- NOT built here. It's a kbuild out-of-tree kernel
+# module and must be compiled against the exact kernel it will be insmod'd
+# into, so a .ko built in the image would only load on a host with the
 # identical kernel version. Instead it's built at container start, against
 # whatever kernel headers the host bind-mounts in. See docker-entrypoint.sh.
-RUN git clone http://rtsrv.cs.unc.edu/cgit/cgit.cgi/nvdebug.git /opt/nvdebug
+#
+# Cloned from a personal mirror (github.com/sarah-e-c/nvdebug), branch
+# "ecrts25-ae" -- the canonical host, rtsrv.cs.unc.edu, is UNC-network-only
+# and unreachable from GitHub Actions/most outside hosts. ecrts25-ae carries
+# newer kernel-compat fixes than master (up through Linux 6.15).
+RUN git clone --branch ecrts25-ae https://github.com/sarah-e-c/nvdebug.git /opt/nvdebug
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
