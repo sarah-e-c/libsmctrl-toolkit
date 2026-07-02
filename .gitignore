@@ -1,0 +1,4 @@
+.claude/
+tester/bench
+tester/results.csv
+*.o
